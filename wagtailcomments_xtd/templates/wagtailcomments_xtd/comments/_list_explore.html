@@ -1,11 +1,11 @@
 {% load i18n %}
-{% load gravatar %}
+{% load comments_xtd %}
 
 <tbody>
 	{% for element in comments %}
 		<tr class="">
-			<td class="ord">
-				<span class="avatar icon icon-user" style="top:0;"><img src="{% gravatar_url element.comment.user_email %}" /></span>
+			<td class="ord" valign="top">
+				<span class="avatar small" style="top:0;"><img src="{{ element.comment.user_email|xtd_comment_gravatar_url }}" /></span>
 			</td>
 			<td class="title" valign="top" data-listing-page-title="">
 				<h2>
@@ -32,10 +32,10 @@
 					{% endif %}
 				</ul>
 			</td>
-			<td class="updated" valign="top">
-				{{ element.comment.submit_date|date:"d M Y H:i" }}
+			<td class="human-readable-date" title="{{ element.comment.submit_date|date:"d M Y H:i" }}" valign="top">
+        {{ element.comment.submit_date|timesince }} ago
 			</td>
-			<td>
+			<td class="status" valign="top">
 				{% if not element.comment.is_public %}
 					<span class="status-tag">{% trans "Deleted" %}</span>
 				{% elif element.comment.is_removed %}

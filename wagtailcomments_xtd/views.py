@@ -1,9 +1,16 @@
 from django.contrib import messages
-from wagtail.wagtailcore.models import Page
 from django.shortcuts import redirect, render
-from django_comments_xtd.models import XtdComment
+from django_comments_xtd import get_model as get_comment_model
 from django.utils.translation import ugettext as _
 from wagtailcomments_xtd.utils import cleaned_tree
+try:
+    from wagtail.wagtailcore.models import Page
+except ImportError:
+    # Wagtail 2.0+
+    from wagtail.core.models import Page
+
+
+XtdComment = get_comment_model()
 
 
 def pages(request):
