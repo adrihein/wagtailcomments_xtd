@@ -32,10 +32,10 @@
 					{% endif %}
 				</ul>
 			</td>
-			<td class="updated" valign="top">
-				{{ element.comment.submit_date|date:"d M Y H:i" }}
+			<td class="human-readable-date" title="{{ element.comment.submit_date|date:"d M Y H:i" }}" valign="top">
+        {{ element.comment.submit_date|timesince }} ago
 			</td>
-			<td>
+			<td class="status" valign="top">
 				{% if not element.comment.is_public %}
 					<span class="status-tag">{% trans "Deleted" %}</span>
 				{% elif element.comment.is_removed %}
