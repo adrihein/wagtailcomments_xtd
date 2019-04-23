@@ -5,10 +5,16 @@ except ImportError:
     # For Django 2.0+
     from django.urls import reverse 
 from wagtailcomments_xtd import urls
-from wagtail.core import hooks
 from django.conf.urls import include, url
-from wagtail.admin.menu import MenuItem
 from django.utils.translation import ugettext_lazy as _
+
+try:
+    from wagtail.wagtailcore import hooks
+    from wagtail.wagtailadmin.menu import MenuItem
+except ImportError:
+    # Wagtail 2.0+
+    from wagtail.core import hooks
+    from wagtail.admin.menu import MenuItem
 
 
 @hooks.register('register_admin_urls')
